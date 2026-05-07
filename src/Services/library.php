@@ -1,10 +1,4 @@
 <?php
-// ============================================================
-//  PARTIE 1 – ADMIN
-//  Fichier : src/Services/Library.php
-//  Rôle    : Gère l'inventaire des livres et la liste membres
-//            Seules les fonctions ADMIN sont ici
-// ============================================================
 
 require_once __DIR__ . '/../Entities/Book.php';
 require_once __DIR__ . '/../Entities/User.php';
@@ -77,9 +71,8 @@ class Library
             echo "📭 Aucun membre.\n";
             return;
         }
-        echo "\n╔═══════════════════════════════════╗\n";
-        echo "║           MEMBRES                  ║\n";
-        echo "╚═══════════════════════════════════╝\n";
+        echo "\n nombre \n";
+        
         foreach ($this->members as $m) {
             $type    = ($m instanceof Teacher) ? 'Teacher' : 'Student';
             $nbLivres = count($m->getBorrowedBooks());
