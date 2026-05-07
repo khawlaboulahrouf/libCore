@@ -14,15 +14,15 @@ class Book
     private string $isbn;
     private string $status; // 'available' | 'borrowed' | 'lost' | 'repair'
 
-    // // ── Constructeur ─────────────────────────────────────────
-    // public function __construct(int $id, string $title, string $author, string $isbn, string $status = 'available')
-    // {
-    //     $this->id     = $id;
-    //     $this->title  = $title;
-    //     $this->author = $author;
-    //     $this->isbn   = $isbn;
-    //     $this->status = $status;
-    // }
+    // ── Constructeur ─────────────────────────────────────────
+    public function __construct(int $id, string $title, string $author, string $isbn, string $status = 'available')
+    {
+        $this->id     = $id;
+        $this->title  = $title;
+        $this->author = $author;
+        $this->isbn   = $isbn;
+        $this->status = $status;
+    }
 
     // // ── Getters ──────────────────────────────────────────────
     // public function getId(): int       { return $this->id; }
