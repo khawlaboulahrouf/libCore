@@ -15,4 +15,17 @@ class Member extends User
             echo " Impossible : '{$book->getTitle()}' n'est pas disponible (statut : {$book->getStatus()}).\n";
             return false;
         }
-    }}
+
+        // Règle 2 : le membre ne doit pas avoir atteint sa limite
+        if (count($this->borrowedBooks) >= $this->getMaxBooks()) {
+            echo " Impossible : {$this->getName()} a déjà atteint sa limite de {$this->getMaxBooks()} livre(s).\n";
+            return false;
+        }
+
+        // Tout est OK → on met à jour le statut et on ajoute à la liste
+        $book->setStatus('borrowed');
+        $this->borrowedBooks[] = $book;
+        echo " '{$book->getTitle()}' emprunté avec succès par {$this->getName()}.\n";
+        return true;
+    }
+}
