@@ -69,4 +69,8 @@ class Student extends Member
     public function getMaxBooks(): int { return 3; }
 }
 
-
+//  Teacher – maximum 10 livres
+class Teacher extends Member
+{
+    public function getMaxBooks(): int { return 10; }
+}
