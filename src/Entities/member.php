@@ -28,4 +28,45 @@ class Member extends User
         echo " '{$book->getTitle()}' emprunté avec succès par {$this->getName()}.\n";
         return true;
     }
+
+    // ─── US7 : Rendre un livre ───────────────────────────────
+    public function returnBook(Book $book): bool
+    {
+        foreach ($this->borrowedBooks as $key => $b) {
+            if ($b->getId() === $book->getId()) {
+                // Le livre redevient disponible
+                $book->setStatus('available');
+                unset($this->borrowedBooks[$key]);
+                $this->borrowedBooks = array_values($this->borrowedBooks);
+                echo "'{$book->getTitle()}' rendu. Il est de nouveau disponible.\n";
+                return true;
+            }
+        }
+        echo " Vous n'avez pas le livre '{$book->getTitle()}' en votre possession.\n";
+        return false;
+    }
+
+    // ─── US8 : Mes livres empruntés ──────────────────────────
+    public function getBorrowedBooks(): array { return $this->borrowedBooks; }
+
+    public function displayBorrowedBooks(): void
+    {
+        if (empty($this->borrowedBooks)) {
+            echo " Vous n'avez aucun livre en cours d'emprunt.\n";
+            return;
+        }
+        echo "\n Vos livres empruntés (" . count($this->borrowedBooks) . "/{$this->getMaxBooks()}) :\n";
+        foreach ($this->borrowedBooks as $book) {
+            echo "   → " . $book . "\n";
+        }
+    }
 }
+
+
+//  Student – maximum 3 livres
+class Student extends Member
+{
+    public function getMaxBooks(): int { return 3; }
+}
+
+
