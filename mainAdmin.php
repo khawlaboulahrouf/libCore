@@ -1,11 +1,5 @@
 <?php
-// ============================================================
-//  PARTIE 1 – ADMIN
-//  Fichier : mainAdmin.php
-//  Lancer  : php mainAdmin.php
-//  Rôle    : Interface console pour le Bibliothécaire
-//            Démo de toutes les US Admin (US1, US2, US3, US4)
-// ============================================================
+
 
 require_once __DIR__ . '/src/Services/Library.php';
 

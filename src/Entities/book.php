@@ -1,9 +1,5 @@
 <?php
-// ============================================================
-//  PARTIE 1 – ADMIN
-//  Fichier : src/Entities/Book.php
-//  Rôle    : Représente un livre dans le catalogue
-// ============================================================
+
 
 class Book
 {
