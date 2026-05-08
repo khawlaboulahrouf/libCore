@@ -70,3 +70,56 @@ function afficherMenu(): void
     echo "Votre choix : ";
 }
 
+//  Boucle principale 
+while (true) {
+    afficherMenu();
+
+    $choix = readline("Votre choix : ");
+
+    switch ($choix) {
+
+        // US5 – Rechercher un livre
+        case '1':
+            $query = readline("Entrez un titre ou un auteur : ");
+            $library->searchBook($query);
+            break;
+
+        // Voir livres disponibles
+        case '2':
+            $library->listAvailableBooks();
+            break;
+
+        // Voir tout le catalogue
+        case '3':
+            $library->listAllBooks();
+            break;
+
+        // US6 – Emprunter un livre
+        case '4':
+            $library->listAvailableBooks();
+            $id = (int) readline("ID du livre à emprunter : ");
+            $library->borrowBook($membre->getId(), $id);
+            break;
+
+        // US7 – Rendre un livre
+        case '5':
+            $membre->displayBorrowedBooks();
+            if (!empty($membre->getBorrowedBooks())) {
+                $id = (int) readline("ID du livre à rendre : ");
+                $library->returnBook($membre->getId(), $id);
+            }
+            break;
+
+        // US8 – Mes livres empruntés
+        case '6':
+            $membre->displayBorrowedBooks();
+            break;
+
+        case '0':
+            echo "\n Au revoir {$membre->getName()} !\n\n";
+            exit;
+
+        default:
+            echo "Choix invalide, réessayez.\n";
+    }
+}
