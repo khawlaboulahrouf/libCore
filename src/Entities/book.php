@@ -1,54 +1,79 @@
 <?php
 
+class Book {
 
-class Book
-{
-    // Toutes les propriétés sont PRIVATE (encapsulation)
-    private int    $id;
-    private string $title;
-    private string $author;
-    private string $isbn;
-    private string $status; // 'available' | 'borrowed' | 'lost' | 'repair'
+    private $id;
+    private $isbn;
+    private $title;
+    private $author;
+    private $isAvailable;
+    private $status;
+    private $idLibrary;
 
-    // ── Constructeur ─────────────────────────────────────────
-    public function __construct(int $id, string $title, string $author, string $isbn, string $status = 'available')
-    {
-        $this->id     = $id;
-        $this->title  = $title;
+    public function __construct($isbn, $title, $author, $idLibrary) {
+
+        $this->isbn = $isbn;
+        $this->title = $title;
         $this->author = $author;
-        $this->isbn   = $isbn;
+        $this->idLibrary = $idLibrary;
+
+        $this->isAvailable = true;
+        $this->status = "disponible";
+    }
+
+
+
+    public function getId() {
+        return $this->id;
+    }
+
+    public function getIsbn() {
+        return $this->isbn;
+    }
+
+    public function getTitle() {
+        return $this->title;
+    }
+
+    public function getAuthor() {
+        return $this->author;
+    }
+
+    public function getIsAvailable() {
+        return $this->isAvailable;
+    }
+
+    public function getStatus() {
+        return $this->status;
+    }
+
+    public function getIdLibrary() {
+        return $this->idLibrary;
+    }
+
+ 
+
+    public function setIsbn($isbn) {
+        $this->isbn = $isbn;
+    }
+
+    public function setTitle($title) {
+        $this->title = $title;
+    }
+
+    public function setAuthor($author) {
+        $this->author = $author;
+    }
+
+    public function setAvailable($status) {
+        $this->isAvailable = $status;
+    }
+
+    public function setStatus($status) {
         $this->status = $status;
     }
 
-
-
-    // ── Getters ──────────────────────────────────────────────
-    public function getId(): int       { return $this->id; }
-    public function getTitle(): string  { return $this->title; }
-    public function getAuthor(): string { return $this->author; }
-    public function getIsbn(): string   { return $this->isbn; }
-    public function getStatus(): string { return $this->status; }
-
-    // ── Setters ──────────────────────────────────────────────
-    public function setTitle(string $title): void   { $this->title  = $title; }
-    public function setStatus(string $status): void { $this->status = $status; }
-
-    // ── Le livre sait s'il est disponible ────────────────────
-    public function isAvailable(): bool
-    {
-        return $this->status === 'available';
-    }
-
-    // ── Affichage dans le terminal ────────────────────────────
-    public function __toString(): string
-    {
-        $icon = match($this->status) {
-            'available' => 'Disponible',
-            'borrowed'  => 'Emprunté',
-            'lost'      => 'Perdu',
-            'repair'    => 'En réparation',
-            default     => 'Inconnu',
-        };
-        return "[ID:{$this->id}] {$this->title} — {$this->author} | ISBN: {$this->isbn} | {$icon}";
+    public function setIdLibrary($idLibrary) {
+        $this->idLibrary = $idLibrary;
     }
 }

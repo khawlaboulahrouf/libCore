@@ -1,28 +1,24 @@
 <?php
 
-abstract class User
-{
-    private int    $id;
-    private string $name;
-    private string $email;
+abstract class User {
 
-    // ── Constructeur ─────────────────────────────────────────
-    public function __construct(int $id, string $name, string $email)
-    {
-        $this->id    = $id;
-        $this->name  = $name;
+    private $id;
+    private $name;
+    private $email;
+
+    public function __construct($name, $email) {
+        $this->name = $name;
         $this->email = $email;
     }
+    public function getId() {
+        return $this->id;
+    }
 
-    // ── Getters ──────────────────────────────────────────────
-    public function getId(): int      { return $this->id; }
-    public function getName(): string  { return $this->name; }
-    public function getEmail(): string { return $this->email; }
+    public function getName() {
+        return $this->name;
+    }
 
-    // ── Setters ──────────────────────────────────────────────
-    public function setName(string $name): void   { $this->name  = $name; }
-    public function setEmail(string $email): void  { $this->email = $email; }
-
-    // Méthode abstraite : chaque sous-classe définit sa limite
-    abstract public function getMaxBooks(): int;
+    public function getEmail() {
+        return $this->email;
+    }
 }
