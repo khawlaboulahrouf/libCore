@@ -1,5 +1,6 @@
 <?php
 
+
 class Book
 {
     // Toutes les propriétés sont PRIVATE (encapsulation)
@@ -42,11 +43,11 @@ class Book
     public function __toString(): string
     {
         $icon = match($this->status) {
-            'available' => ' Disponible',
-            'borrowed'  => ' Emprunté',
-            'lost'      => ' Perdu',
-            'repair'    => ' En réparation',
-            default     => ' Inconnu',
+            'available' => 'Disponible',
+            'borrowed'  => 'Emprunté',
+            'lost'      => 'Perdu',
+            'repair'    => 'En réparation',
+            default     => 'Inconnu',
         };
         return "[ID:{$this->id}] {$this->title} — {$this->author} | ISBN: {$this->isbn} | {$icon}";
     }
