@@ -1,6 +1,6 @@
 <?php
 require 'script/db.php';
-require 'src/Services/Library.php';
+require 'src/Services/library.php';
 $library = new Library($pdo);
 while (true) {
     echo "\n===== ADMIN DASHBOARD =====\n";

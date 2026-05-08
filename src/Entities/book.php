@@ -27,32 +27,53 @@ class Book {
         return $this->id;
     }
 
-    // ── Getters ──────────────────────────────────────────────
-    public function getId(): int       { return $this->id; }
-    public function getTitle(): string  { return $this->title; }
-    public function getAuthor(): string { return $this->author; }
-    public function getIsbn(): string   { return $this->isbn; }
-    public function getStatus(): string { return $this->status; }
-
-    // ── Setters ──────────────────────────────────────────────
-    public function setStatus(string $status): void { $this->status = $status; }
-
-    // ── Méthode intelligente : le livre sait s'il est dispo ──
-    public function isAvailable(): bool
-    {
-        return $this->status === 'available';
+    public function getIsbn() {
+        return $this->isbn;
     }
 
-    // ── Affichage ─────────────────────────────────────────────
-    public function __toString(): string
-    {
-        $icon = match($this->status) {
-            'available' => ' Disponible',
-            'borrowed'  => ' Emprunté',
-            'lost'      => ' Perdu',
-            'repair'    => 'En réparation',
-            default     => ' Inconnu',
-        };
-        return "[ID:{$this->id}] {$this->title} — {$this->author} | {$icon}";
+    public function getTitle() {
+        return $this->title;
+    }
+
+    public function getAuthor() {
+        return $this->author;
+    }
+
+    public function getIsAvailable() {
+        return $this->isAvailable;
+    }
+
+    public function getStatus() {
+        return $this->status;
+    }
+
+    public function getIdLibrary() {
+        return $this->idLibrary;
+    }
+
+ 
+
+    public function setIsbn($isbn) {
+        $this->isbn = $isbn;
+    }
+
+    public function setTitle($title) {
+        $this->title = $title;
+    }
+
+    public function setAuthor($author) {
+        $this->author = $author;
+    }
+
+    public function setAvailable($status) {
+        $this->isAvailable = $status;
+    }
+
+    public function setStatus($status) {
+        $this->status = $status;
+    }
+
+    public function setIdLibrary($idLibrary) {
+        $this->idLibrary = $idLibrary;
     }
 }
