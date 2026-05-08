@@ -29,7 +29,7 @@ $library->registerMember($bob);
 // ─── 4. Menu interactif ──────────────────────────────────────
 function afficherMenu(): void
 {
-    echo "     LibCore – Dashboard Bibliothécaire       \n";
+    echo "     LibCore - Dashboard Bibliothécaire       \n";
     echo "  1. Voir tous les livres            \n";
     echo "  2. Ajouter un livre                \n";
     echo "  3. Retirer un livre               \n";
