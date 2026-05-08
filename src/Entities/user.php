@@ -1,4 +1,9 @@
 <?php
+// ============================================================
+//  PARTIE 2 – MEMBRE
+//  Fichier : src/Entities/User.php
+//  Rôle    : Classe abstraite – socle commun de tout utilisateur
+// ============================================================
 
 abstract class User
 {
@@ -6,7 +11,6 @@ abstract class User
     private string $name;
     private string $email;
 
-    // ── Constructeur ─────────────────────────────────────────
     public function __construct(int $id, string $name, string $email)
     {
         $this->id    = $id;
@@ -23,6 +27,6 @@ abstract class User
     public function setName(string $name): void   { $this->name  = $name; }
     public function setEmail(string $email): void  { $this->email = $email; }
 
-    // Méthode abstraite : chaque sous-classe définit sa limite
+    // Chaque sous-classe définit sa limite d'emprunts
     abstract public function getMaxBooks(): int;
 }
