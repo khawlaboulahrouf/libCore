@@ -1,26 +1,31 @@
 <?php
 
+class Book {
 
-class Book
-{
-    // Toutes les propriétés sont PRIVATE (encapsulation)
-    private int    $id;
-    private string $title;
-    private string $author;
-    private string $isbn;
-    private string $status; // 'available' | 'borrowed' | 'lost' | 'repair'
+    private $id;
+    private $isbn;
+    private $title;
+    private $author;
+    private $isAvailable;
+    private $status;
+    private $idLibrary;
 
-    // ── Constructeur ─────────────────────────────────────────
-    public function __construct(int $id, string $title, string $author, string $isbn, string $status = 'available')
-    {
-        $this->id     = $id;
-        $this->title  = $title;
+    public function __construct($isbn, $title, $author, $idLibrary) {
+
+        $this->isbn = $isbn;
+        $this->title = $title;
         $this->author = $author;
-        $this->isbn   = $isbn;
-        $this->status = $status;
+        $this->idLibrary = $idLibrary;
+
+        $this->isAvailable = true;
+        $this->status = "disponible";
     }
 
 
+
+    public function getId() {
+        return $this->id;
+    }
 
     // ── Getters ──────────────────────────────────────────────
     public function getId(): int       { return $this->id; }
@@ -30,25 +35,24 @@ class Book
     public function getStatus(): string { return $this->status; }
 
     // ── Setters ──────────────────────────────────────────────
-    public function setTitle(string $title): void   { $this->title  = $title; }
     public function setStatus(string $status): void { $this->status = $status; }
 
-    // ── Le livre sait s'il est disponible ────────────────────
+    // ── Méthode intelligente : le livre sait s'il est dispo ──
     public function isAvailable(): bool
     {
         return $this->status === 'available';
     }
 
-    // ── Affichage dans le terminal ────────────────────────────
+    // ── Affichage ─────────────────────────────────────────────
     public function __toString(): string
     {
         $icon = match($this->status) {
-            'available' => 'Disponible',
-            'borrowed'  => 'Emprunté',
-            'lost'      => 'Perdu',
+            'available' => ' Disponible',
+            'borrowed'  => ' Emprunté',
+            'lost'      => ' Perdu',
             'repair'    => 'En réparation',
-            default     => 'Inconnu',
+            default     => ' Inconnu',
         };
-        return "[ID:{$this->id}] {$this->title} — {$this->author} | ISBN: {$this->isbn} | {$icon}";
+        return "[ID:{$this->id}] {$this->title} — {$this->author} | {$icon}";
     }
 }

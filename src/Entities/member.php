@@ -1,62 +1,75 @@
 <?php
-
-require_once __DIR__ . '/User.php';
-require_once __DIR__ . '/Book.php';
-
 class Member extends User
 {
-    private array $borrowedBooks = []; // livres actuellement empruntés
+    // Liste des livres actuellement empruntés
+    private array $borrowedBooks = [];
 
-    // Limite par défaut (Student et Teacher la surchargent)
+    // Limite par défaut (remplacée par les sous-classes)
     public function getMaxBooks(): int { return 3; }
 
-    // ── Emprunter ─────────────────────────────────────────────
+    // ─── US6 : Emprunter un livre ────────────────────────────
     public function borrowBook(Book $book): bool
     {
+        // Règle 1 : le livre doit être disponible
         if (!$book->isAvailable()) {
-            echo "'{$book->getTitle()}' n'est pas disponible.\n";
+            echo " Impossible : '{$book->getTitle()}' n'est pas disponible (statut : {$book->getStatus()}).\n";
             return false;
         }
+
+        // Règle 2 : le membre ne doit pas avoir atteint sa limite
         if (count($this->borrowedBooks) >= $this->getMaxBooks()) {
-            echo "Limite atteinte ({$this->getMaxBooks()} livres max).\n";
+            echo " Impossible : {$this->getName()} a déjà atteint sa limite de {$this->getMaxBooks()} livre(s).\n";
             return false;
         }
+
+        // Tout est OK → on met à jour le statut et on ajoute à la liste
         $book->setStatus('borrowed');
         $this->borrowedBooks[] = $book;
-        echo "'{$book->getTitle()}' emprunté par {$this->getName()}.\n";
+        echo " '{$book->getTitle()}' emprunté avec succès par {$this->getName()}.\n";
         return true;
     }
 
-    // ── Rendre ────────────────────────────────────────────────
+    // ─── US7 : Rendre un livre ───────────────────────────────
     public function returnBook(Book $book): bool
     {
         foreach ($this->borrowedBooks as $key => $b) {
             if ($b->getId() === $book->getId()) {
+                // Le livre redevient disponible
                 $book->setStatus('available');
                 unset($this->borrowedBooks[$key]);
                 $this->borrowedBooks = array_values($this->borrowedBooks);
-                echo "'{$book->getTitle()}' rendu.\n";
+                echo "'{$book->getTitle()}' rendu. Il est de nouveau disponible.\n";
                 return true;
             }
         }
-        echo "Vous n'avez pas ce livre.\n";
+        echo " Vous n'avez pas le livre '{$book->getTitle()}' en votre possession.\n";
         return false;
     }
 
+    // ─── US8 : Mes livres empruntés ──────────────────────────
     public function getBorrowedBooks(): array { return $this->borrowedBooks; }
+
+    public function displayBorrowedBooks(): void
+    {
+        if (empty($this->borrowedBooks)) {
+            echo " Vous n'avez aucun livre en cours d'emprunt.\n";
+            return;
+        }
+        echo "\n Vos livres empruntés (" . count($this->borrowedBooks) . "/{$this->getMaxBooks()}) :\n";
+        foreach ($this->borrowedBooks as $book) {
+            echo "   → " . $book . "\n";
+        }
+    }
 }
 
-// ─────────────────────────────────────────────────────────────
-//  Student – max 3 livres
-// ─────────────────────────────────────────────────────────────
+
+//  Student – maximum 3 livres
 class Student extends Member
 {
     public function getMaxBooks(): int { return 3; }
 }
 
-// ─────────────────────────────────────────────────────────────
-//  Teacher – max 10 livres
-// ─────────────────────────────────────────────────────────────
+//  Teacher – maximum 10 livres
 class Teacher extends Member
 {
     public function getMaxBooks(): int { return 10; }
