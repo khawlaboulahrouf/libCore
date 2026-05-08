@@ -1,26 +1,30 @@
 <?php
-// ============================================================
-//  PARTIE 2 – MEMBRE
-//  Fichier : src/Entities/Book.php
-//  Rôle    : Représente un livre
-//            Le livre sait lui-même s'il est disponible
-// ============================================================
 
-class Book
-{
-    private int    $id;
-    private string $title;
-    private string $author;
-    private string $isbn;
-    private string $status; // 'available' | 'borrowed' | 'lost' | 'repair'
+class Book {
 
-    public function __construct(int $id, string $title, string $author, string $isbn, string $status = 'available')
-    {
-        $this->id     = $id;
-        $this->title  = $title;
+    private $id;
+    private $isbn;
+    private $title;
+    private $author;
+    private $isAvailable;
+    private $status;
+    private $idLibrary;
+
+    public function __construct($isbn, $title, $author, $idLibrary) {
+
+        $this->isbn = $isbn;
+        $this->title = $title;
         $this->author = $author;
-        $this->isbn   = $isbn;
-        $this->status = $status;
+        $this->idLibrary = $idLibrary;
+
+        $this->isAvailable = true;
+        $this->status = "disponible";
+    }
+
+
+
+    public function getId() {
+        return $this->id;
     }
 
     // ── Getters ──────────────────────────────────────────────
