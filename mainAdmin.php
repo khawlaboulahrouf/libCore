@@ -1,6 +1,6 @@
 <?php
-require 'config/database.php';
 require 'script/db.php';
+require 'src/Services/Library.php';
 $library = new Library($pdo);
 while (true) {
     echo "\n===== ADMIN DASHBOARD =====\n";
@@ -25,14 +25,13 @@ while (true) {
         case 3:
             $library->listBooks();
             break;
-        case 4:
+        case 4:     
             $library->markAsRepair();
             break;
-        case 5:
+        case 5:     
             $library->deleteBook();
             break;
         default:
             echo "Option invalide\n";
     }
 }
-
