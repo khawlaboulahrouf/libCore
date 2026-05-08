@@ -55,3 +55,18 @@ $type = ($membre instanceof Teacher) ? 'Teacher' : 'Student';
 
 echo "\nBienvenue {$membre->getName()} ! [{$type} - max {$membre->getMaxBooks()} livres]\n";
 
+//  4. Menu interactif 
+function afficherMenu(): void
+{
+    echo "Menu Espace Membre\n";
+   
+    echo "  1. Rechercher un livre \n";
+    echo "  2.  Voir les livres disponibles \n";
+    echo "  3.  Voir tout le catalogue \n";
+    echo "  4.  Emprunter un livre \n";
+    echo "  5.  Rendre un livre \n";
+    echo "  6. Mes livres en cours  \n";
+    echo "  0.  Quitter \n";
+    echo "Votre choix : ";
+}
+
